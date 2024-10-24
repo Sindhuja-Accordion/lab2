@@ -1,22 +1,20 @@
 version: 0.2
-
+ 
 phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
       - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 864899837235.dkr.ecr.ap-south-1.amazonaws.com
-
+ 
   build:
     commands:
       - echo Building the Docker image...
-      - docker build -t training/user9 .
-      - docker tag training/user9:latest 864899837235.dkr.ecr.ap-south-1.amazonaws.com/sindhu/myrepo:latest
-      
-
+      - docker build -t training/user8 .
+      - docker tag training/user8:latest 864899837235.dkr.ecr.ap-south-1.amazonaws.com/sindhu/myrepo:latest
   post_build:
     commands:
       - echo Pushing the Docker image to ECR...
       - docker push 864899837235.dkr.ecr.ap-south-1.amazonaws.com/sindhu/myrepo:latest
-
+ 
 artifacts:
   files: appspec.yml
